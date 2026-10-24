@@ -14,7 +14,7 @@
 
 **If Python is not installed:** ask the instructor for the hosted HTTPS preview link for the first 20-minute demo, or complete Step 1 below first. Do **not** open `Lab1/web/index.html` using a `file://` URL because module imports/camera access may fail.
 
-> This course starter is subject to instructor preflight. A working camera alone does not imply the student gesture classifier is already trained: it will be added in Labs 3–4.
+> A working camera alone does not imply the student gesture classifier is already trained: it will be added in Labs 3–4.
 
 ## 1. Choose your Python environment
 
@@ -196,7 +196,3 @@ Submit **one PDF page or screenshot set** showing:
 - One sentence distinguishing **Python training**, **browser inference**, and **remote Colab compute**
 
 Do not submit any personal/private webcam footage unless you choose to and have all necessary permissions. Generative AI help with troubleshooting is encouraged, but verify each suggested fix.
-
-## Instructor checklist (not a student grading task)
-
-Test both `venv` and Conda on Windows and macOS, verify each `LabN/web/app.js` dependency URL and model downloads, test webcam permissions under localhost, and validate the ONNX browser deployment using a known reference classifier before class begins. Provide a hosted HTTPS quick-win page and a recorded-feature fallback if feasible.
