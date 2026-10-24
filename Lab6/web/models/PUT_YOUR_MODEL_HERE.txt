@@ -1,0 +1,1 @@
+After Lab 3 put gesture_model.onnx and classes.json here. The app works for webcam/landmarks without them.

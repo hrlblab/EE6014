@@ -4,6 +4,24 @@
 **Weeks:** 5–6 | **Total:** 70 points | **Alignment:** CLO 1, 2, 3, 4  
 **Product:** GestureAI — Touchless Computer Control
 
+## In this folder
+
+| File | Purpose |
+|---|---|
+| `Lab03_Train_Classifier.ipynb` | Train the Small MLP with a session-based split; export PyTorch and ONNX |
+| `Lab03_Embedded_Model_Design_Space.ipynb` | Compare Tiny / Small / Large models |
+| `classes.json` | Gesture class order (must match the web app) |
+| `requirements.txt` | Python packages |
+
+**You need:** Your Lab 2 session CSVs.  
+**You produce:** `gesture_model.pth`, `gesture_model.onnx`, `classes.json`. **Keep them; Labs 4–7 use them.**
+
+## How to start
+
+First time? Set up Python once using [`../SETUP_STUDENTS.md`](../SETUP_STUDENTS.md). Then, with your environment active, run `python -m pip install -r requirements.txt` from this folder.
+
+**Run the notebooks** in Google Colab (upload the `.ipynb` and the input files when prompted), or locally in VS Code/JupyterLab with your `gestureai` kernel. The upload cells use `google.colab`; when running locally, replace them with a path to your files.
+
 ## Mission and deliverable
 Create **Tiny/Small/Large trained PyTorch networks and measured design-space table**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 

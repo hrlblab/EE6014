@@ -4,6 +4,22 @@
 **Weeks:** 7–8 | **Total:** 70 points | **Alignment:** CLO 4, 5  
 **Product:** GestureAI — Touchless Computer Control
 
+## In this folder
+
+| File | Purpose |
+|---|---|
+| `Lab04_ONNX_Verify_Benchmark.ipynb` | PyTorch vs ONNX Runtime parity check and CPU benchmark |
+| `requirements.txt` | Python packages |
+
+**You need:** `gesture_model.pth` and `gesture_model.onnx` from Lab 3, plus one held-out session CSV from Lab 2.  
+**You produce:** Parity results and a batch=1 / batch=32 latency table.
+
+## How to start
+
+First time? Set up Python once using [`../SETUP_STUDENTS.md`](../SETUP_STUDENTS.md). Then, with your environment active, run `python -m pip install -r requirements.txt` from this folder.
+
+**Run the notebook** in Google Colab (upload the `.ipynb` and the input files when prompted), or locally in VS Code/JupyterLab with your `gestureai` kernel. The upload cells use `google.colab`; when running locally, replace them with a path to your files.
+
 ## Mission and deliverable
 Create **Validated ONNX CPU deployment and engine comparison**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 

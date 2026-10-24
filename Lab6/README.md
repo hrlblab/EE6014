@@ -4,6 +4,31 @@
 **Weeks:** 11–12 | **Total:** 70 points | **Alignment:** CLO 4, 7, 8  
 **Product:** GestureAI — Touchless Computer Control
 
+## In this folder
+
+| File | Purpose |
+|---|---|
+| `Lab06_Optimization_and_MCU.ipynb` | ONNX Runtime graph-optimization benchmark and MCU memory estimate |
+| `web/` | Webcam app; modify `web/app.js` for frame skipping, voting, and cooldown |
+| `requirements.txt` | Python packages |
+
+**You need:** `gesture_model.onnx` and `classes.json` from Lab 3. Copy both into `web/models/` so the app can **Load Classifier**.  
+**You produce:** Scheduler comparison, telemetry tables, and MCU memory budget.
+
+## How to start
+
+First time? Set up Python once using [`../SETUP_STUDENTS.md`](../SETUP_STUDENTS.md). Then, with your environment active, run `python -m pip install -r requirements.txt` from this folder.
+
+**Run the webcam app** from this folder (`Lab6/`):
+
+```bash
+python -m http.server 8000
+```
+
+Then open **http://localhost:8000/web/** in Chrome or Edge and click **Start Camera**. Press **Ctrl+C** to stop the server.
+
+**Run the notebook** in Google Colab (upload the `.ipynb` and the input files when prompted), or locally in VS Code/JupyterLab with your `gestureai` kernel. The upload cells use `google.colab`; when running locally, replace them with a path to your files.
+
 ## Mission and deliverable
 Create **Stable action loop and defensible edge resource budget**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 

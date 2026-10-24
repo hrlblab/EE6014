@@ -10,17 +10,17 @@ webcam → MediaPipe hand landmarks (pretrained) → 42 features → your classi
 
 ## The seven labs
 
-Each lab spans two weeks. Detailed instructions and rubrics are in [`handouts/`](handouts/).
+Each lab spans two weeks and lives in its own self-contained folder: open `LabN/` and its `README.md` has the instructions, rubric, the files you need, and how to start.
 
 | Lab | Weeks | Topic | What you do |
 |---|---|---|---|
-| [1](handouts/Lab_01_GestureAI.md) | 1–2 | Sensor-to-Action Pipeline & PyTorch Foundations | Run the webcam app, see hand landmarks, measure detector latency and FPS |
-| [2](handouts/Lab_02_GestureAI.md) | 3–4 | Data Acquisition, Sampling & Tiny AI Dataset | Capture four gestures in two sessions; study sampling rate and dataset quality |
-| [3](handouts/Lab_03_GestureAI.md) | 5–6 | Train & Compare Embedded-Size Models | Train Tiny/Small/Large classifiers; compare accuracy, size, and CPU latency |
-| [4](handouts/Lab_04_GestureAI.md) | 7–8 | Portable Deployment: ONNX & CPU | Export to ONNX, verify parity, benchmark PyTorch vs ONNX Runtime |
-| [5](handouts/Lab_05_GestureAI.md) | 9–10 | Precision, Quantization & Compression | Build an INT8 model; compare accuracy, size, and latency |
-| [6](handouts/Lab_06_GestureAI.md) | 11–12 | Real-Time Scheduling, Memory & MCU Feasibility | Tune stability and false triggers; estimate an MCU SRAM/Flash budget |
-| [7](handouts/Lab_07_GestureAI.md) | 13–14 | Production-Like Edge AI Web App | Ship your model in the browser app with full telemetry and a live demo |
+| [1](Lab1/) | 1–2 | Sensor-to-Action Pipeline & PyTorch Foundations | Run the webcam app, see hand landmarks, measure detector latency and FPS |
+| [2](Lab2/) | 3–4 | Data Acquisition, Sampling & Tiny AI Dataset | Capture four gestures in two sessions; study sampling rate and dataset quality |
+| [3](Lab3/) | 5–6 | Train & Compare Embedded-Size Models | Train Tiny/Small/Large classifiers; compare accuracy, size, and CPU latency |
+| [4](Lab4/) | 7–8 | Portable Deployment: ONNX & CPU | Export to ONNX, verify parity, benchmark PyTorch vs ONNX Runtime |
+| [5](Lab5/) | 9–10 | Precision, Quantization & Compression | Build an INT8 model; compare accuracy, size, and latency |
+| [6](Lab6/) | 11–12 | Real-Time Scheduling, Memory & MCU Feasibility | Tune stability and false triggers; estimate an MCU SRAM/Flash budget |
+| [7](Lab7/) | 13–14 | Production-Like Edge AI Web App | Ship your model in the browser app with full telemetry and a live demo |
 
 The four gestures are `open_palm`, `fist`, `peace`, and `thumbs_up`.
 
@@ -43,8 +43,8 @@ Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main
 conda create -n gestureai python=3.11 -y
 conda activate gestureai
 python -m pip install --upgrade pip
-python -m pip install -r shared/requirements.txt
-python shared/check_environment.py
+python -m pip install -r Lab1/requirements.txt
+python Lab1/check_environment.py
 ```
 
 Every line of the check should print `PASS`.
@@ -55,22 +55,30 @@ Prefer plain Python with `venv`, or using Windows? **[SETUP_STUDENTS.md](SETUP_S
 
 ```bash
 conda activate gestureai
-python -m http.server 8000
+python -m http.server 8000 -d Lab1
 ```
 
-Open **http://localhost:8000/web/** in Chrome or Edge, click **Start Camera**, and allow camera access. You should see a hand skeleton over your hand. Press **Ctrl+C** in the terminal to stop the server.
+Open **http://localhost:8000/web/** in Chrome or Edge, click **Start Camera**, and allow camera access. You should see a hand skeleton over your hand. For Labs 2, 6, and 7, serve that lab's folder instead (`-d Lab2`, and so on). Press **Ctrl+C** in the terminal to stop the server.
 
 Do not open `web/index.html` by double-clicking it: the camera only works over `http://localhost` or HTTPS.
 
 ## Repository layout
 
 ```
-handouts/    Lab 1–7 instructions and rubrics
-notebooks/   Jupyter starters: dataset inspection, training, ONNX, quantization, optimization
-web/         Browser app: camera, hand landmarks, dataset capture, gesture control
-web/models/  Put your trained gesture_model.onnx and classes.json here (from Lab 3 on)
-shared/      requirements.txt, environment check, class list
+README.md          This overview
+SETUP_STUDENTS.md  One-time Python setup for every OS (Conda or venv) and troubleshooting
+Lab1/  README.md, web/ (webcam app), check_environment.py, requirements.txt
+Lab2/  README.md, web/ (dataset capture), Lab02_Dataset_Inspection.ipynb, classes.json
+Lab3/  README.md, Lab03_Train_Classifier.ipynb, Lab03_Embedded_Model_Design_Space.ipynb, classes.json
+Lab4/  README.md, Lab04_ONNX_Verify_Benchmark.ipynb
+Lab5/  README.md, Lab05_Quantization.ipynb
+Lab6/  README.md, Lab06_Optimization_and_MCU.ipynb, web/ (scheduling experiments)
+Lab7/  README.md, web/ (final app; put your model in web/models/)
 ```
+
+Every lab folder also has its own `requirements.txt`. You only need **one** Python environment for the whole course.
+
+Labs build on each other: keep the CSVs from Lab 2 and the model files from Lab 3 (`gesture_model.pth`, `gesture_model.onnx`, `classes.json`). Each lab's README lists exactly which earlier files it needs.
 
 Notebooks can run locally (VS Code or JupyterLab with the `gestureai` kernel) or on free Google Colab CPU. The webcam app always runs on your own laptop.
 

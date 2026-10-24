@@ -6,13 +6,13 @@
 
 ## 0. Quick Win — Open GestureAI first (before installing libraries)
 
-1. Download and unzip the course package (keep its directory structure).
-2. Open a terminal in the folder containing `README.md`, `web/`, and `shared/`.
-3. If Python is already installed, run `python -m http.server 8000`. On macOS/Linux, use `python3 -m http.server 8000` if needed.
+1. Clone the course repository (`git clone https://github.com/hrlblab/EE6014.git`) or download it as a ZIP and unzip it, keeping its directory structure.
+2. Open a terminal in the repository folder (the one containing `README.md`, `SETUP_STUDENTS.md`, and `Lab1/` … `Lab7/`).
+3. If Python is already installed, run `python -m http.server 8000 -d Lab1`. On macOS/Linux, use `python3 -m http.server 8000 -d Lab1` if needed.
 4. Open **http://localhost:8000/web/** in Chrome or Edge; click **Start Camera** and allow webcam access.
 5. You should see hand landmarks when you put your hand in front of the camera. The app downloads pretrained browser models/scripts when online; webcam frames are processed locally in the browser.
 
-**If Python is not installed:** ask the instructor for the hosted HTTPS preview link for the first 20-minute demo, or complete Step 1 below first. Do **not** open `web/index.html` using a `file://` URL because module imports/camera access may fail.
+**If Python is not installed:** ask the instructor for the hosted HTTPS preview link for the first 20-minute demo, or complete Step 1 below first. Do **not** open `Lab1/web/index.html` using a `file://` URL because module imports/camera access may fail.
 
 > This course starter is subject to instructor preflight. A working camera alone does not imply the student gesture classifier is already trained: it will be added in Labs 3–4.
 
@@ -23,7 +23,7 @@
 - **Option A: Python 3.11 + `venv`** (Steps 1A, 2A). Best for students already using standard Python.
 - **Option B: Miniconda/Anaconda + `conda`** (Steps 1B, 2B). Best for students who already use Conda. Miniconda is sufficient; a full Anaconda installation is not required.
 
-**Choose ONE environment method. Do not install the course requirements into the Conda `base` environment or mix a `.venv` activation with a Conda environment.** Both methods use `shared/requirements.txt` and the same environment check.
+**Choose ONE environment method. Do not install the course requirements into the Conda `base` environment or mix a `.venv` activation with a Conda environment.** Both methods use `Lab1/requirements.txt` and the same environment check. Set up **one** environment for the whole course and reuse it in every lab; each `LabN/requirements.txt` lists the same packages.
 
 ## 1A. Python 3.11 installation (venv route)
 
@@ -43,7 +43,7 @@ On Windows, if the `py` launcher is missing, use `python --version` after a stan
 
 ## 2A. Create a virtual environment (venv route; one time)
 
-From the project root:
+From the repository root:
 
 **Windows PowerShell:**
 ```powershell
@@ -61,7 +61,7 @@ Using the full virtual-environment Python path avoids PowerShell execution-polic
 
 ## 1B–2B. Conda route (instead of Steps 1A–2A)
 
-Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main) or use an existing supported Conda installation. Open **Anaconda Prompt / Miniconda Prompt** on Windows, or a Conda-initialized terminal on macOS/Linux. From the project root:
+Install [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main) or use an existing supported Conda installation. Open **Anaconda Prompt / Miniconda Prompt** on Windows, or a Conda-initialized terminal on macOS/Linux. From the repository root:
 
 ```bash
 conda create -n gestureai python=3.11 -y
@@ -76,17 +76,17 @@ If `conda activate` fails, use the Miniconda Prompt (Windows) or initialize the 
 
 **Windows PowerShell:**
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r shared/requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r Lab1/requirements.txt
 ```
 
 **macOS/Linux using venv:**
 ```bash
-./.venv/bin/python -m pip install -r shared/requirements.txt
+./.venv/bin/python -m pip install -r Lab1/requirements.txt
 ```
 
 **Any OS using Conda (with `gestureai` activated):**
 ```bash
-python -m pip install -r shared/requirements.txt
+python -m pip install -r Lab1/requirements.txt
 ```
 
 Install all course dependencies into the selected environment. Use Conda to manage the Python environment, and the supplied requirements file with pip for consistent package installation; do not also install separate copies of the same dependencies into that environment unless instructed.
@@ -97,47 +97,49 @@ The course requirements include PyTorch, NumPy, pandas, scikit-learn, matplotlib
 
 **Windows PowerShell:**
 ```powershell
-.\.venv\Scripts\python.exe shared/check_environment.py
+.\.venv\Scripts\python.exe Lab1/check_environment.py
 ```
 
 **macOS/Linux using venv:**
 ```bash
-./.venv/bin/python shared/check_environment.py
+./.venv/bin/python Lab1/check_environment.py
 ```
 
 **Any OS using Conda:**
 ```bash
 conda activate gestureai
-python shared/check_environment.py
+python Lab1/check_environment.py
 ```
 
 Successful output shows `PASS` for all required Python imports and displays the PyTorch CPU inference tensor shape.
 
 ## 5. Run the browser application
 
-With the virtual environment installed, run from the project root:
+With the environment installed, run from the repository root. `-d LabN` selects which lab's app to serve; Lab 1 is shown here:
 
 **Windows PowerShell:**
 ```powershell
-.\.venv\Scripts\python.exe -m http.server 8000
+.\.venv\Scripts\python.exe -m http.server 8000 -d Lab1
 ```
 
 **macOS/Linux using venv:**
 ```bash
-./.venv/bin/python -m http.server 8000
+./.venv/bin/python -m http.server 8000 -d Lab1
 ```
 
 **Any OS using Conda:**
 ```bash
 conda activate gestureai
-python -m http.server 8000
+python -m http.server 8000 -d Lab1
 ```
 
-Open http://localhost:8000/web/ in Chrome or Edge. Leave the terminal open while using the page. Use **Ctrl+C** to stop the server.
+Open http://localhost:8000/web/ in Chrome or Edge. For a later lab, replace `Lab1` with `Lab2`, `Lab6`, or `Lab7`. Leave the terminal open while using the page. Use **Ctrl+C** to stop the server.
 
 The app runs camera/landmark processing in the browser. The `http.server` command only serves files from your laptop; it is **not** an AI inference cloud server.
 
 ## 6. Working with notebooks (Labs 2–6)
+
+Each lab folder contains its own notebook(s); see that folder's `README.md` for which input files it needs from earlier labs.
 
 **Option A: Google Colab (recommended when local setup fails).** Upload the notebooks and input CSVs to Colab. In a setup cell, install the packages necessary for each notebook as directed. Colab is for Python training/analysis, **not** the real-time browser camera/FPS measurement.
 
@@ -197,4 +199,4 @@ Do not submit any personal/private webcam footage unless you choose to and have 
 
 ## Instructor checklist (not a student grading task)
 
-Test both `venv` and Conda on Windows and macOS, verify `web/app.js` dependency URLs and model downloads, test webcam permissions under localhost, and validate the ONNX browser deployment using a known reference classifier before class begins. Provide a hosted HTTPS quick-win page and a recorded-feature fallback if feasible.
+Test both `venv` and Conda on Windows and macOS, verify each `LabN/web/app.js` dependency URL and model downloads, test webcam permissions under localhost, and validate the ONNX browser deployment using a known reference classifier before class begins. Provide a hosted HTTPS quick-win page and a recorded-feature fallback if feasible.

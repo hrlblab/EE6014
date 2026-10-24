@@ -4,6 +4,31 @@
 **Weeks:** 1–2 | **Total:** 70 points | **Alignment:** CLO 1, 4  
 **Product:** GestureAI — Touchless Computer Control
 
+## In this folder
+
+| File | Purpose |
+|---|---|
+| `web/` | GestureAI webcam app (hand landmarks, timing telemetry) |
+| `check_environment.py` | Verifies your Python packages and runs a tiny PyTorch inference |
+| `requirements.txt` | Python packages for the course |
+
+**You need:** Nothing; this is the first lab.  
+**You produce:** Environment-check output, landmark screenshot, and timing tables.
+
+## How to start
+
+First time? Set up Python once using [`../SETUP_STUDENTS.md`](../SETUP_STUDENTS.md). Then, with your environment active, run `python -m pip install -r requirements.txt` from this folder.
+
+**Check your environment:** `python check_environment.py`. Every line should print `PASS`.
+
+**Run the webcam app** from this folder (`Lab1/`):
+
+```bash
+python -m http.server 8000
+```
+
+Then open **http://localhost:8000/web/** in Chrome or Edge and click **Start Camera**. Press **Ctrl+C** to stop the server.
+
 ## Mission and deliverable
 Create **Live webcam landmarks and a tiny PyTorch inference demo**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 

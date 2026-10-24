@@ -4,6 +4,29 @@
 **Weeks:** 13–14 | **Total:** 70 points | **Alignment:** CLO 4, 8, 9  
 **Product:** GestureAI — Touchless Computer Control
 
+## In this folder
+
+| File | Purpose |
+|---|---|
+| `web/` | The GestureAI app you finish and deploy |
+| `web/models/` | Put your `gesture_model.onnx` and `classes.json` here |
+| `requirements.txt` | Python packages (only needed to re-export or verify your model) |
+
+**You need:** Your verified FP32 `gesture_model.onnx` and `classes.json` from Labs 3–4. Copy both into `web/models/`.  
+**You produce:** Deployed or locally demonstrated app, README, benchmark table, and demo video.
+
+## How to start
+
+First time? Set up Python once using [`../SETUP_STUDENTS.md`](../SETUP_STUDENTS.md). Then, with your environment active, run `python -m pip install -r requirements.txt` from this folder.
+
+**Run the webcam app** from this folder (`Lab7/`):
+
+```bash
+python -m http.server 8000
+```
+
+Then open **http://localhost:8000/web/** in Chrome or Edge and click **Start Camera**. Press **Ctrl+C** to stop the server.
+
 ## Mission and deliverable
 Create **Portfolio-grade privacy-first GestureAI local-inference demo**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 

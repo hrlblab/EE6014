@@ -4,6 +4,32 @@
 **Weeks:** 3–4 | **Total:** 70 points | **Alignment:** CLO 1, 4  
 **Product:** GestureAI — Touchless Computer Control
 
+## In this folder
+
+| File | Purpose |
+|---|---|
+| `web/` | Webcam app; use the **Capture dataset** panel to record gesture CSVs |
+| `Lab02_Dataset_Inspection.ipynb` | Load your CSVs and inspect class balance and sessions |
+| `classes.json` | Gesture class order: `open_palm`, `fist`, `peace`, `thumbs_up` |
+| `requirements.txt` | Python packages |
+
+**You need:** Nothing beyond your webcam.  
+**You produce:** Two or more session CSVs (`gesture_<session>.csv`). **Keep them; Labs 3–5 use them.**
+
+## How to start
+
+First time? Set up Python once using [`../SETUP_STUDENTS.md`](../SETUP_STUDENTS.md). Then, with your environment active, run `python -m pip install -r requirements.txt` from this folder.
+
+**Run the webcam app** from this folder (`Lab2/`):
+
+```bash
+python -m http.server 8000
+```
+
+Then open **http://localhost:8000/web/** in Chrome or Edge and click **Start Camera**. Press **Ctrl+C** to stop the server.
+
+**Run the notebook** in Google Colab (upload the `.ipynb` and the input files when prompted), or locally in VS Code/JupyterLab with your `gestureai` kernel. The upload cells use `google.colab`; when running locally, replace them with a path to your files.
+
 ## Mission and deliverable
 Create **Four-class gesture CSV with reproducible on-device feature extraction**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 

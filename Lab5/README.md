@@ -4,6 +4,22 @@
 **Weeks:** 9–10 | **Total:** 70 points | **Alignment:** CLO 4, 6  
 **Product:** GestureAI — Touchless Computer Control
 
+## In this folder
+
+| File | Purpose |
+|---|---|
+| `Lab05_Quantization.ipynb` | Dynamic INT8 quantization; size, accuracy, and latency comparison |
+| `requirements.txt` | Python packages |
+
+**You need:** `gesture_model.onnx` from Lab 3 and a held-out session CSV from Lab 2.  
+**You produce:** `gesture_model_int8.onnx` and the FP32 vs INT8 comparison.
+
+## How to start
+
+First time? Set up Python once using [`../SETUP_STUDENTS.md`](../SETUP_STUDENTS.md). Then, with your environment active, run `python -m pip install -r requirements.txt` from this folder.
+
+**Run the notebook** in Google Colab (upload the `.ipynb` and the input files when prompted), or locally in VS Code/JupyterLab with your `gestureai` kernel. The upload cells use `google.colab`; when running locally, replace them with a path to your files.
+
 ## Mission and deliverable
 Create **FP32/INT8 comparisons across different classifier capacities**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 
