@@ -182,7 +182,7 @@ In VS Code or Jupyter, select the Python interpreter/kernel corresponding to you
 | Blank camera from `file://` | Use `http://localhost:8000/web/` |
 | Models/scripts cannot load | Confirm internet access, inspect browser console, and report the error; the starter uses external downloads |
 | A Python package fails to install | Confirm Python version and OS/architecture; include full error text in support request |
-| No webcam | Use the instructor-supplied feature CSV/video reference path; label reference measurements accurately |
+| No webcam | In the web app, **Load Classifier**, then choose `Lab7/sample_data/gesture_demo_stream.csv` under *Replay a recorded feature CSV* and click **Replay CSV**; label reference measurements accurately |
 | Notebook runs in Colab but webcam app does not | Browser and Python environments are separate: webcam app runs on your laptop |
 
 ## 8. Lab 1 environment checkpoint submission

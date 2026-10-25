@@ -45,6 +45,13 @@ async function loadClassifier(){
  }catch(e){status('No compatible ONNX model yet: '+e.message+'. Continue Lab 1/2 with landmarks only.');}
 }
 async function classify(x){const t0=performance.now();const input=new ort.Tensor('float32',Float32Array.from(x),[1,42]);const result=await session.run({[session.inputNames[0]]:input});const logits=Array.from(result[session.outputNames[0]].data);const probs=softmax(logits);const k=probs.indexOf(Math.max(...probs));return {label:classifierClasses[k]||String(k),confidence:probs[k],ms:performance.now()-t0};}
+async function handleFeatures(x){
+ if(session){const result=await classify(x);$('classTime').textContent=result.ms.toFixed(2)+' ms';$('confidence').textContent=(100*result.confidence).toFixed(1)+'%';$('prediction').textContent=result.label;
+    // Lab 6: students modify streak threshold and cooldown; no cloud inference.
+    if(result.confidence>=.75){if(result.label===stable)streak++;else{stable=result.label;streak=1;}if(streak>=5 && Date.now()-lastActionAt>1600){act(result.label);lastActionAt=Date.now();}}
+    else{stable='';streak=0;}
+ }else $('prediction').textContent='Hand detected (load your model in Lab 3)';
+}
 async function loop(){
  if(!active)return;
  try{
@@ -56,11 +63,7 @@ async function loop(){
     const points=res.landmarks[0];const draw=new DrawingUtils(ctx);draw.drawConnectors(points,HandLandmarker.HAND_CONNECTIONS,{color:'#54ffcb',lineWidth:3});draw.drawLandmarks(points,{color:'#ffbe55',radius:3});
     const x=features(points);
     if(capturing && Date.now()-window.lastSaved>180){rows.push([$('label').value,$('session').value,Date.now(),...x]);window.lastSaved=Date.now();$('count').textContent=rows.length+' samples (features only; no video saved)';}
-    if(session){const result=await classify(x);$('classTime').textContent=result.ms.toFixed(2)+' ms';$('confidence').textContent=(100*result.confidence).toFixed(1)+'%';$('prediction').textContent=result.label;
-       // Lab 6: students modify streak threshold and cooldown; no cloud inference.
-       if(result.confidence>=.75){if(result.label===stable)streak++;else{stable=result.label;streak=1;}if(streak>=5 && Date.now()-lastActionAt>1600){act(result.label);lastActionAt=Date.now();}}
-       else{stable='';streak=0;}
-    }else $('prediction').textContent='Hand detected (load your model in Lab 3)';
+    await handleFeatures(x);
    }else{$('prediction').textContent='No hand';$('confidence').textContent='—';stable='';streak=0;}
    frames++;if(performance.now()-lastFPS>1000){$('fps').textContent=(frames*1000/(performance.now()-lastFPS)).toFixed(1);lastFPS=performance.now();frames=0;}
   }
@@ -68,8 +71,37 @@ async function loop(){
  if(active)requestAnimationFrame(loop);
 }
 $('start').onclick=startCamera;
-$('stop').onclick=()=>{active=false;capturing=false;$('capture').textContent='Start Capture';videoStream?.getTracks().forEach(t=>t.stop());$('video').srcObject=null;status('Camera stopped.');};
+$('stop').onclick=()=>{active=false;replaying=false;capturing=false;$('capture').textContent='Start Capture';videoStream?.getTracks().forEach(t=>t.stop());$('video').srcObject=null;status('Camera stopped.');};
 $('load').onclick=loadClassifier;
 $('capture').onclick=()=>{capturing=!capturing;window.lastSaved=0;$('capture').textContent=capturing?'Stop Capture':'Start Capture';};
 $('clear').onclick=()=>{rows=[];$('count').textContent='0 samples (features only; no video saved)';};
 $('export').onclick=()=>{if(!rows.length)return alert('Collect samples first.');const head=['label','session','timestamp',...Array.from({length:42},(_,i)=>'f'+i)];const csv=[head.join(','),...rows.map(r=>r.join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='gesture_'+$('session').value+'.csv';a.click();URL.revokeObjectURL(a.href);};
+// No-webcam mode: replay a recorded feature CSV (Lab 2 format) at its recorded timing through the same classifier and decision logic.
+let replaying=false;
+function drawFeatures(x){
+  const canvas=$('overlay'),ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);
+  const s=canvas.height*0.32,cx=canvas.width/2,cy=canvas.height*0.72,p=i=>[cx+x[2*i]*s,cy+x[2*i+1]*s];
+  ctx.strokeStyle='#54ffcb';ctx.lineWidth=3;
+  for(const {start,end} of HandLandmarker.HAND_CONNECTIONS){ctx.beginPath();ctx.moveTo(...p(start));ctx.lineTo(...p(end));ctx.stroke();}
+  ctx.fillStyle='#ffbe55';for(let i=0;i<21;i++){ctx.beginPath();ctx.arc(...p(i),3,0,2*Math.PI);ctx.fill();}
+}
+async function replayCSV(text){
+  const lines=text.trim().split(/\r?\n/),head=lines[0].split(',');
+  const fi=Array.from({length:42},(_,i)=>head.indexOf('f'+i)),ti=head.indexOf('timestamp');
+  if(fi.some(i=>i<0)||ti<0)throw new Error('CSV needs timestamp and f0..f41 columns (Lab 2 format).');
+  if(!session)await loadClassifier();
+  $('stop').click();replaying=true;const canvas=$('overlay');canvas.width=640;canvas.height=480;
+  status('Replaying recorded features (no camera).');let prev=null;
+  for(const line of lines.slice(1)){
+    if(!replaying)break;
+    const c=line.split(','),t=+c[ti];
+    // A jump between recordings is replayed as the hand leaving the view.
+    if(prev!==null&&t-prev>300){stable='';streak=0;$('prediction').textContent='No hand';canvas.getContext('2d').clearRect(0,0,640,480);await new Promise(r=>setTimeout(r,300));}
+    else if(prev!==null)await new Promise(r=>setTimeout(r,t-prev));
+    prev=t;const x=fi.map(i=>+c[i]);drawFeatures(x);await handleFeatures(x);
+    frames++;if(performance.now()-lastFPS>1000){$('fps').textContent=(frames*1000/(performance.now()-lastFPS)).toFixed(1);lastFPS=performance.now();frames=0;}
+  }
+  status(replaying?'Replay finished.':'Replay stopped.');replaying=false;
+}
+window.replayCSV=replayCSV;
+$('replay').onclick=async()=>{const f=$('replayFile').files[0];if(!f)return alert('Choose a feature CSV first (Lab 2 format).');try{await replayCSV(await f.text());}catch(e){status('Replay error: '+e.message);}};

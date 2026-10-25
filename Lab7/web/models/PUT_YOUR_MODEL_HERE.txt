@@ -1,1 +1,6 @@
-After Lab 3 put gesture_model.onnx and classes.json here. The app works for webcam/landmarks without them.
+Replace gesture_model.onnx and classes.json here with your own verified Lab 3-4 model.
+
+The files supplied here are an instructor REFERENCE model for the first-20-minutes quick win:
+42->64->32->4 MLP (FP32 ONNX, opset 17) trained on one person's two recording sessions.
+Held-out-session accuracy is about 70% (leave-one-session-out), and "peace" is unreliable because
+the two sessions recorded different hand shapes for it. Do not report its numbers as your own.

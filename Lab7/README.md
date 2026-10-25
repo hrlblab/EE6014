@@ -9,10 +9,11 @@
 | File | Purpose |
 |---|---|
 | `web/` | The GestureAI app you finish and deploy |
-| `web/models/` | Put your `gesture_model.onnx` and `classes.json` here |
+| `web/models/` | Instructor reference model for the quick win; replace it with your `gesture_model.onnx` and `classes.json` |
+| `sample_data/gesture_demo_stream.csv` | Recorded 42-feature stream (~18 s, 7 gestures) for **Replay CSV** when you have no webcam |
 | `requirements.txt` | Python packages (only needed to re-export or verify your model) |
 
-**You need:** Your verified FP32 `gesture_model.onnx` and `classes.json` from Labs 3–4. Copy both into `web/models/`.  
+**You need:** Your verified FP32 `gesture_model.onnx` and `classes.json` from Labs 3–4. Copy both into `web/models/`, replacing the reference model (see `web/models/PUT_YOUR_MODEL_HERE.txt`).  
 **You produce:** Deployed or locally demonstrated app, README, benchmark table, and demo video.
 
 ## How to start
