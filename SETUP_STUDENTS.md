@@ -1,7 +1,7 @@
 # ECE 6041 — GestureAI Student Environment Setup
 
 **Who:** Students using Windows 10/11, macOS, or Linux.  
-**When:** Lab 1, Week 1, after the 20-minute browser quick taste.  
+**When:** Lab 1, after the 20-minute browser quick taste.  
 **Goal:** Open the GestureAI webcam app locally and run the course Python/ONNX notebooks. A Jetson, NVIDIA GPU, Docker, and paid Colab are **not required**.
 
 ## 0. Quick Taste — Open GestureAI first (before installing libraries)

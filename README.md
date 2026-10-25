@@ -10,17 +10,17 @@ webcam → MediaPipe hand landmarks (pretrained) → 42 features → your classi
 
 ## The seven labs
 
-Each lab spans two weeks and lives in its own self-contained folder: open `LabN/` and its `README.md` has the instructions, rubric, the files you need, and how to start.
+Each lab lives in its own self-contained folder: open `LabN/` and its `README.md` has the instructions, rubric, the files you need, and how to start.
 
-| Lab | Weeks | Topic | What you do |
-|---|---|---|---|
-| [1](Lab1/) | 1–2 | Sensor-to-Action Pipeline & PyTorch Foundations | Run the webcam app, see hand landmarks, measure detector latency and FPS |
-| [2](Lab2/) | 3–4 | Data Acquisition, Sampling & Tiny AI Dataset | Capture four gestures in two sessions; study sampling rate and dataset quality |
-| [3](Lab3/) | 5–6 | Train & Compare Embedded-Size Models | Train Tiny/Small/Large classifiers; compare accuracy, size, and CPU latency |
-| [4](Lab4/) | 7–8 | Portable Deployment: ONNX & CPU | Export to ONNX, verify parity, benchmark PyTorch vs ONNX Runtime |
-| [5](Lab5/) | 9–10 | Precision, Quantization & Compression | Build an INT8 model; compare accuracy, size, and latency |
-| [6](Lab6/) | 11–12 | Real-Time Scheduling, Memory & MCU Feasibility | Tune stability and false triggers; estimate an MCU SRAM/Flash budget |
-| [7](Lab7/) | 13–14 | Production-Like Edge AI Web App | Ship your model in the browser app with full telemetry and a live demo |
+| Lab | Topic | What you do |
+|---|---|---|
+| [1](Lab1/) | Sensor-to-Action Pipeline & PyTorch Foundations | Run the webcam app, see hand landmarks, measure detector latency and FPS |
+| [2](Lab2/) | Data Acquisition, Sampling & Tiny AI Dataset | Capture four gestures in two sessions; study sampling rate and dataset quality |
+| [3](Lab3/) | Train & Compare Embedded-Size Models | Train Tiny/Small/Large classifiers; compare accuracy, size, and CPU latency |
+| [4](Lab4/) | Portable Deployment: ONNX & CPU | Export to ONNX, verify parity, benchmark PyTorch vs ONNX Runtime |
+| [5](Lab5/) | Precision, Quantization & Compression | Build an INT8 model; compare accuracy, size, and latency |
+| [6](Lab6/) | Real-Time Scheduling, Memory & MCU Feasibility | Tune stability and false triggers; estimate an MCU SRAM/Flash budget |
+| [7](Lab7/) | Production-Like Edge AI Web App | Ship your model in the browser app with full telemetry and a live demo |
 
 The four gestures are `open_palm`, `fist`, `peace`, and `thumbs_up`.
 
