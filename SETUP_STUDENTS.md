@@ -1,10 +1,10 @@
 # ECE 6041 — GestureAI Student Environment Setup
 
 **Who:** Students using Windows 10/11, macOS, or Linux.  
-**When:** Lab 1, Week 1, after the 20-minute browser quick win.  
+**When:** Lab 1, Week 1, after the 20-minute browser quick taste.  
 **Goal:** Open the GestureAI webcam app locally and run the course Python/ONNX notebooks. A Jetson, NVIDIA GPU, Docker, and paid Colab are **not required**.
 
-## 0. Quick Win — Open GestureAI first (before installing libraries)
+## 0. Quick Taste — Open GestureAI first (before installing libraries)
 
 1. Clone the course repository (`git clone https://github.com/hrlblab/EE6014.git`) or download it as a ZIP and unzip it, keeping its directory structure.
 2. Open a terminal in the repository folder (the one containing `README.md`, `SETUP_STUDENTS.md`, and `Lab1/` … `Lab7/`).

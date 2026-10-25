@@ -9,7 +9,7 @@
 | File | Purpose |
 |---|---|
 | `web/` | The GestureAI app you finish and deploy |
-| `web/models/` | Instructor reference model for the quick win; replace it with your `gesture_model.onnx` and `classes.json` |
+| `web/models/` | Instructor reference model for the quick taste; replace it with your `gesture_model.onnx` and `classes.json` |
 | `sample_data/gesture_demo_stream.csv` | Recorded 42-feature stream (~18 s, 7 gestures) for **Replay CSV** when you have no webcam |
 | `requirements.txt` | Python packages (only needed to re-export or verify your model) |
 
@@ -31,7 +31,7 @@ Then open **http://localhost:8000/web/** in Chrome or Edge and click **Start Cam
 ## Mission and deliverable
 Create **Portfolio-grade privacy-first GestureAI local-inference demo**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 
-## First 20 minutes — quick win
+## First 20 minutes — quick taste
 Open the starter UI, load supplied tested ONNX model and actuate one slide-control command within 20 minutes.
 
 ## Two-week student instructions

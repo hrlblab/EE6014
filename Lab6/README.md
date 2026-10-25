@@ -32,7 +32,7 @@ Then open **http://localhost:8000/web/** in Chrome or Edge and click **Start Cam
 ## Mission and deliverable
 Create **Stable action loop and defensible edge resource budget**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 
-## First 20 minutes — quick win
+## First 20 minutes — quick taste
 See graph-optimization benchmark and live camera/classifier FPS telemetry within 20 minutes.
 
 ## Two-week student instructions

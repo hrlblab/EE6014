@@ -33,7 +33,7 @@ Then open **http://localhost:8000/web/** in Chrome or Edge and click **Start Cam
 ## Mission and deliverable
 Create **Four-class gesture CSV with reproducible on-device feature extraction**. Your product runs or is analyzed at the edge; hand landmark detection is pretrained, while the student-built gesture classifier is trained in PyTorch and exported to ONNX. A laptop/browser is a legitimate edge target, but is **not** equivalent to MCU deployment.
 
-## First 20 minutes — quick win
+## First 20 minutes — quick taste
 Use page capture controls to save the first 10 landmark feature rows as CSV in 20 minutes.
 
 ## Two-week student instructions
